@@ -7,8 +7,8 @@
       <button className='TaskButton'>Add</button>
      </div>
   ```
-**2. オーバーレイの要素を追加**
-    - オーバーレイ：モーダルウィンドウが開いたときにブラウザ全体を覆う薄暗い幕の要素
+**2. オーバーレイの要素を追加**  
+  - オーバーレイ：モーダルウィンドウが開いたときにブラウザ全体を覆う薄暗い幕の要素
   ```
     <div className='modal-overlay'></div>
   ```
@@ -30,8 +30,8 @@
       /* positionをfixedにするとbutton要素よりも重ね順が上となるため、z-index設定はなくてもよい */
    ```
 
-**3. コンテンツの追加**
-  設定したオーバーレイの中にコンテンツを追加。
+**3. コンテンツの追加**  
+  - 設定したオーバーレイの中にコンテンツを追加。
   ```
     <div className='modal-overlay'>
       <div className='modal-content'>
@@ -40,7 +40,7 @@
     </div>
   ```
   
-**4. Modalの表示非表示設定**
+**4. Modalの表示非表示設定**  
   - useState使用
   ```
   import { useState } from "react";
@@ -83,7 +83,8 @@
         <button onClick={onClose}>×</button>
       );
   ```
-※Typescriptでは型の明記が必要
+**6. Typescriptの型定義**
+  - Typescriptでは型の明記が必要
   - 例：複数プロパティがある場合、interfaceを使うと良い
   ```
     interface ModalProps {
@@ -96,7 +97,7 @@
     /* 使い方2 */
     const TaskModal = (props :ModalProps) => {}
   ```
-**6. stopPropagationの設定**
+**7. stopPropagationの設定**
   - コンテンツ要素(className='modal-content')でClickイベントが親コンポーネントに伝搬しないための設定
   ```
     <div className='modal-content' onClick={(e) => e.stoppropagation()}>
