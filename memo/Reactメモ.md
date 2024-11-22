@@ -93,7 +93,7 @@
     }
     /* 使い方1 */
     const TaskModal: React.FC<ModalProps> = (props) => {} // React.FC：ModalPropsを指定することで、TypeScriptがコンポーネントのプロパティに型チェックを行う。
-                                                          // 間違った方で渡した場合、エラーを出してくれるため、バグを未然に防ぎやすい
+                                                          // 間違った型で渡した場合、エラーを出してくれるため、バグを未然に防ぎやすい
     /* 使い方2 */
     const TaskModal = (props :ModalProps) => {}
   ```
