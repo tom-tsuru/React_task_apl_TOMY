@@ -1,13 +1,13 @@
 # Reactメモ
 今回作成するタスク管理アプリで使用したReactメモ
 ### モーダルウィンドウの作成手順
-1. クリックボタンの作成
+**1. クリックボタンの作成**
   ```
     <div>
       <button className='TaskButton'>Add</button>
      </div>
   ```
-2. オーバーレイの要素を追加
+**2. オーバーレイの要素を追加**
     - オーバーレイ：モーダルウィンドウが開いたときにブラウザ全体を覆う薄暗い幕の要素
   ```
     <div className='modal-overlay'></div>
@@ -30,7 +30,7 @@
       /* positionをfixedにするとbutton要素よりも重ね順が上となるため、z-index設定はなくてもよい */
    ```
 
-3. コンテンツの追加
+**3. コンテンツの追加**
   設定したオーバーレイの中にコンテンツを追加。
   ```
     <div className='modal-overlay'>
@@ -40,7 +40,7 @@
     </div>
   ```
   
-4. Modalの表示非表示設定
+**4. Modalの表示非表示設定**
   - useState使用
   ```
   import { useState } from "react";
@@ -68,7 +68,7 @@
        ・・・
       }}
   ```
-5. クリックイベント追加
+**5. クリックイベント追加**
   - AddボタンをクリックしてisModalOpenの値をfalseからtrueに変更できるようにする
   ```
     <button onClick={() => setIsModalOpen(true)}>Add</button>
@@ -96,7 +96,7 @@
     /* 使い方2 */
     const TaskModal = (props :ModalProps) => {}
   ```
-6. stopPropagationの設定
+**6. stopPropagationの設定**
   - コンテンツ要素(className='modal-content')でClickイベントが親コンポーネントに伝搬しないための設定
   ```
     <div className='modal-content' onClick={(e) => e.stoppropagation()}>
