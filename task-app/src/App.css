@@ -1,0 +1,31 @@
+.App {
+  text-align: center;
+} 
+
+.App-header {
+  background-color: #cae5f0d7;
+  min-height: 100vh;
+  display: flex; /* 横並びにする */
+  align-items: flex-start; /* 中央揃え */
+  justify-content: flex-start; /* 中央揃え */
+  font-size: calc(18px + 2vmin); /* フォントサイズ */
+  font-family: 'Georgia', serif; /* セリフ体 */
+  font-weight: normal; /* セリフ体のまま */
+  color: black; /* 白色で目立つ */
+}
+
+.App-task {
+  align-items: center; /* 中央揃え */
+  justify-content: center; /* 中央揃え */
+}
+
+
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
