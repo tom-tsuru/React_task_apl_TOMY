@@ -2,10 +2,18 @@
 ## 使用言語
 - フロントエンド
   - TypeScript+React
-- バックエンド
+- バックエンド 
   - 未定
+  - chat GPT候補
+    - Node.js + Express
+    - Firebase (バックエンド as a Service)
+    - Django + Python (REST API)
 - データベース
-  - 未定(SQLite?)
+  - 未定
+  - chat GPT候補
+    - SQLite
+    - Firebase Firestore
+    - PostgreSQL / MySQL
 ## 作業場所
   開発は本リポジトリで行う。作業完了後GitHub(クラウドサービス)にPUSHする
 ## 仕様検討
