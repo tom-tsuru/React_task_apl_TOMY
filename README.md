@@ -38,3 +38,7 @@
 <div align="center">
   <img src="./task-apl-img.drawio.svg" width="90%"><br><br>
 </div>
+
+## 現状(2024/12/03)
+<img src="http://ghe.nanao.co.jp/storage/user/287/files/a944afee-023c-4f01-abde-310cd0d0b60a" width="60%" />
+<img src="http://ghe.nanao.co.jp/storage/user/287/files/d8d3693a-96d3-4bff-9166-bbe68c5e5aa5" width="60%" />
