@@ -49,4 +49,4 @@
 
 ## 現状(2024/12/03)
 <img src="http://ghe.nanao.co.jp/storage/user/287/files/a944afee-023c-4f01-abde-310cd0d0b60a" width="60%" />
-<img src="http://ghe.nanao.co.jp/storage/user/287/files/d8d3693a-96d3-4bff-9166-bbe68c5e5aa5" width="60%" />
+<img src="http://ghe.nanao.co.jp/storage/user/287/files/a814bd00-1eb6-47e1-889a-4e4b32b0c260" width="60%" />
