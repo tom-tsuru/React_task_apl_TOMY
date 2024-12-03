@@ -1,0 +1,16 @@
+.Task-buttons {
+  display: flex; /* Task-button を縦並びにする */
+  flex-direction: column;   /* 縦並びにする */
+  gap: 10px; /* ボタン間のスペース */
+  width: 10%;      /* 幅 */
+  height: 100%;     /* 高さ */
+}
+
+.Task-button {
+  color: rgb(22, 100, 74); /* フォントカラー */
+  width: 100%;      /* 幅 */
+  height: 50px;     /* 高さ */
+  border: none;  /* 枠線なし */
+  border-radius: 20px;  /* 角丸 */
+  background-color: #c2c2c2;  /* 背景色 */
+}

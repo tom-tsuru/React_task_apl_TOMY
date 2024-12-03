@@ -1,0 +1,83 @@
+.Task-apl {
+  display: flex;
+  flex-direction: column; /* 縦方向に並べる */
+  gap: 20px; /* 要素間の隙間 */
+  justify-content: space-between; /* Plan と Task を上下に配置 */
+  height: 100%; /* 親要素の高さに合わせる */
+}
+
+.Plan {
+  text-align: left; /* テキストを中央に配置 */
+  line-height: 5px; /* 行の高さ */
+  height: 40%; /* 高さ */
+  position: absolute;  /* 親要素に対して絶対的な位置指定 */
+  left: 10px;          /* 親要素の左端から20px右に配置 */
+  right: 10px;          /* 親要素の左端から20px右に配置 */
+  top: 100px;        /* 親要素の下端から20px上に配置 */
+  display: flex;  /* 横並びにする */
+  justify-content: space-between; /* 枠の間隔を均等に配置 */
+  gap: 20px; /* 枠間の統一間隔 */
+  font-size: 15px; /* フォントサイズ */
+} 
+
+.outlook-Plan {
+  color: rgb(204, 94, 67); /* フォントカラー */
+  width: 40%;      /* 幅 */
+  height: 60%;     /* 高さ */
+  border-radius: 20px;  /* 角丸 */
+  background-color: #ffffff9a;  /* 背景色 */
+}
+
+.wait-Plan {
+color: rgb(204, 94, 67); /* フォントカラー */
+width: 40%;      /* 幅 */
+height: 60%;     /* 高さ */
+border-radius: 20px;  /* 角丸 */
+background-color: #ffffff9a;  /* 背景色 */
+}
+
+.my-Plan {
+color: rgb(204, 94, 67); /* フォントカラー */
+width: 40%;      /* 幅 */
+height: 60%;     /* 高さ */
+border-radius: 20px;  /* 角丸 */
+background-color: #ffffff9a;  /* 背景色 */
+}
+
+.Task {
+  text-align: center; /* テキストを中央に配置 */
+  height: 60%; /* 高さ */
+  position: absolute;  /* 親要素に対して絶対的な位置指定 */
+  left: 10px;          /* 親要素の左端から20px右に配置 */
+  right: 10px;          /* 親要素の左端から20px右に配置 */
+  bottom: 20px;        /* 親要素の下端から20px上に配置 */
+  display: flex;  /* 横並びにする */
+  justify-content: space-between; /* 枠の間隔を均等に配置 */
+  gap: 20px; /* 枠間の統一間隔 */
+  font-size: 20px; /* フォントサイズ */
+
+} 
+
+.Task-todo {
+    color: rgb(22, 100, 74); /* フォントカラー */
+    width: 35%;      /* 幅 */
+    height: 100%;     /* 高さ */
+    border-radius: 20px;  /* 角丸 */
+    background-color: #f8e6e6;  /* 背景色 */
+}
+
+.Task-doing {
+  color: rgb(22, 100, 74); /* フォントカラー */
+  width: 50%;      /* 幅 */
+  height: 100%;     /* 高さ */
+  border-radius: 20px;  /* 角丸 */
+  background-color: #f8e6e6;  /* 背景色 */
+}
+
+.Task-done {
+  color: rgb(22, 100, 74); /* フォントカラー */
+  width: 35%;      /* 幅 */
+  height: 100%;     /* 高さ */
+  border-radius: 20px;  /* 角丸 */
+  background-color: #f8e6e6;  /* 背景色 */
+}

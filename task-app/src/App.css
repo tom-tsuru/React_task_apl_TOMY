@@ -5,6 +5,7 @@
 .App-header {
   background-color: #cae5f0d7;
   min-height: 100vh;
+  height: 100%;
   display: flex; /* 横並びにする */
   align-items: flex-start; /* 中央揃え */
   justify-content: flex-start; /* 中央揃え */
