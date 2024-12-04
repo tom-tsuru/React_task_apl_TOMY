@@ -41,3 +41,8 @@ JavaScriptの中にスタイル(CSS)を記述する方法。(CSS in JS)
     - up('sm')：指定した画面サイズ以上のスクリーンサイズに対してスタイルを適用
     - sm：通常600px以上のスクリーンサイズに対応
   - theme.spacing(1)：テーマの設定に基づいたスペースを提供。通常8pxスペース。 
+
+### '& .MuiInputBase-input'
+MUIのinputBaseコンポーネントに適用されるスタイルのセレクト。このスタイルはInputBase内の実際の入力フィールド(テキストボックス)に適用される。
+- &：現在のコンポーネント(ここでは親要素)を指す
+- .MuiInputBase-input：Materila-UI内部で使われるクラス名で、InputBaseコンポーネントの実際の入力フィールド部分に適用される。
