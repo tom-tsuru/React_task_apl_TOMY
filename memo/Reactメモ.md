@@ -17,8 +17,8 @@ interface MyContextType {
 
 // Contextを初期値を設定して作成(更新関数はから関数で仮置き)
 export const MyContext = React.createContext<MyContextType>({
-  value: "";
-  setValue: () => {};
+  value: "",
+  setValue: () => {}
 });
 ```
 
