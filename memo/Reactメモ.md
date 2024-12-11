@@ -22,7 +22,10 @@ export const MyContext = React.createContext<MyContextType>({
 });
 ```
 ※プロバイダーがある場合はContextで初期値を設定しなくてもよい。
-
+```
+// Context作成（初期値設定なし）
+export const TaskContext = React.createContext<TaskContextType | undefined>(undefined);
+```
 #### 2. 値を供給するProviderを設定
 0. typescriptの場合、型を定義する
 1. 普通の値を渡す場合
