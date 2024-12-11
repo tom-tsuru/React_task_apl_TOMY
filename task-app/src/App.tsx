@@ -1,14 +1,14 @@
 import React from 'react';
-import './App.css';
-import TaskList from "./taskList/TaskList";
+import HeaderBar from './taskList/HeaderBar';
+import TaskList from './taskList/TaskList';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>TOMY-TASK</p>
+    <div>
+      <header>
+        <HeaderBar />
       </header>
-      <div className="App-task">
+      <div>
         <TaskList />
       </div>
     </div>
