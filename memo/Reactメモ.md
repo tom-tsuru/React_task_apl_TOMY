@@ -21,6 +21,7 @@ export const MyContext = React.createContext<MyContextType>({
   setValue: () => {}
 });
 ```
+※プロバイダーがある場合はContextで初期値を設定しなくてもよい。
 
 #### 2. 値を供給するProviderを設定
 0. typescriptの場合、型を定義する
