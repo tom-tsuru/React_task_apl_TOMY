@@ -39,7 +39,8 @@ export const MyProvider = ({ children }: {children: React.ReactNode }) => {
   );
 };
 ```
-  - childrenにMyProviderでラップしたコンポーネントツリーが入る
+  - provider用の別ファイルを作成し、使いたいコンポーネントを作成したプロバイダーコンポーネントで囲む({children})
+    - childrenにMyProviderでラップしたコンポーネントツリーが入る
   - value={{value, setValue}}で値と更新関数をコンポーネント全体に供給している
 ## 呼出側
 ### 大まかな手順
@@ -57,6 +58,7 @@ const ChildComponent = () => {
   return <div> Context value: {value} </div>;
 };
 ```
+- contextで複数値が渡されている場合でも、使いたい値だけ呼び出し使うことが可能
 
 #### ii) useStateの値と更新関数を取得する場合
 - 値を取得して表示し、更新関数を呼び出して変更する場合
