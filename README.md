@@ -50,6 +50,6 @@
 ## 進捗(2024/12/18)
 - material UI活用してタスク追加画面のUI作成
 - 内容クリア/削除機能は実装
-![image](http://ghe.nanao.co.jp/storage/user/287/files/e19ea68c-1820-4ef0-bc72-0f8627c17f5a)
-![image](http://ghe.nanao.co.jp/storage/user/287/files/f9ba72f4-eb20-43e7-a388-20eaf2cd5468)
+<img src="http://ghe.nanao.co.jp/storage/user/287/files/e19ea68c-1820-4ef0-bc72-0f8627c17f5a" width="60%">
+<img src="http://ghe.nanao.co.jp/storage/user/287/files/f9ba72f4-eb20-43e7-a388-20eaf2cd5468" width="60%">
 
