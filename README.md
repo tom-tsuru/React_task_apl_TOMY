@@ -47,6 +47,9 @@
   <img src="./task-apl-img.drawio.svg" width="90%"><br><br>
 </div>
 
-## 現状(2024/12/03)
-<img src="http://ghe.nanao.co.jp/storage/user/287/files/a944afee-023c-4f01-abde-310cd0d0b60a" width="60%" />
-<img src="http://ghe.nanao.co.jp/storage/user/287/files/a814bd00-1eb6-47e1-889a-4e4b32b0c260" width="60%" />
+## 進捗(2024/12/18)
+- material UI活用してタスク追加画面のUI作成
+- 内容クリア/削除機能は実装
+![image](http://ghe.nanao.co.jp/storage/user/287/files/e19ea68c-1820-4ef0-bc72-0f8627c17f5a)
+![image](http://ghe.nanao.co.jp/storage/user/287/files/f9ba72f4-eb20-43e7-a388-20eaf2cd5468)
+
