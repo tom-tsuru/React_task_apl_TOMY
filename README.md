@@ -2,6 +2,7 @@
 ## 使用言語
 - フロントエンド
   - Vite+TypeScript+React
+  - electron(デスクトップアプリ化)
 - バックエンド 
   - 未定
   - chat GPT候補
