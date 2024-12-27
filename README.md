@@ -1,7 +1,7 @@
 # Reactを使ったタスク管理アプリ
 ## 使用言語
 - フロントエンド
-  - TypeScript+React
+  - Vite+TypeScript+React
 - バックエンド 
   - 未定
   - chat GPT候補
