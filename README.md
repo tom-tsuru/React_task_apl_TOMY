@@ -43,10 +43,10 @@
 - Outlookの予定表示
 - お遊び要素なんかいれたい
 - ライトモード・ダークモード切替
-## イメージ図
+<!-- ## イメージ図
 <div align="center">
   <img src="./task-apl-img.drawio.svg" width="90%"><br><br>
-</div>
+</div> -->
 
 ## 進捗(2024/12/18)
 - material UI活用してタスク追加画面のUI作成
