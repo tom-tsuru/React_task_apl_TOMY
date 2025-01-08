@@ -1,17 +1,26 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from 'electron-vite';
 import react from '@vitejs/plugin-react';
 
-// https://vitejs.dev/config/
 export default defineConfig({
 
-  server: {
-    port: 3000, // 例えば、3000番に変更
+  main: {
+    build: {
+      rollupOptions: {
+        input: 'public/main.js', // mainプロセスのエントリーポイント
+      },
+    },
   },
-  plugins: [react()],  // React のプラグインを追加
-  build: {
-    outDir: 'dist',  // 出力先のディレクトリ
-    rollupOptions: {
-      input: 'src/index.tsx',  // エントリーポイントを指定
+  renderer: {
+    plugins: [react()], // Renderer 用プラグイン
+    build: {
+      rollupOptions: {
+        input: 'src/index.tsx', // rendererプロセスのエントリーポイント（React用）
+      },
+    },
+    server: {
+      port: 3004,  // 使用したいポート番号
+      strictPort: true, // ポートが使用中の場合エラーを発生させる
+      open: true, // サーバー起動時にブラウザを自動で開く
     },
   },
 });

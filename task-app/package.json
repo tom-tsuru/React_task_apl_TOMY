@@ -10,6 +10,7 @@
     "@mui/icons-material": "^6.1.9",
     "@mui/material": "^6.1.10",
     "@mui/x-date-pickers": "^7.23.1",
+    "@swc/core": "^1.10.6",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -19,6 +20,7 @@
     "@types/react-dom": "^18.3.1",
     "browserify-zlib": "^0.2.0",
     "dayjs": "^1.11.13",
+    "electron-vite": "^2.3.0",
     "postcss": "^8.4.49",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -31,8 +33,8 @@
     "dev": "vite",
     "build": "vite build",
     "test": "vitest",
-    "electron-start": "concurrently \"npm run dev\" \"wait-on http://localhost:3000 && electron .\"",
-    "electron-build": "npm run build && electron-builder"
+    "electron-start": "electron-vite dev",
+    "electron-build": "electron-vite build"
   },
   "eslintConfig": {
     "extends": [
@@ -59,7 +61,8 @@
     "electron": "^32.0.0",
     "electron-builder": "^25.1.8",
     "gh-pages": "^6.2.0",
-    "vite": "^6.0.6",
+    "vite": "^4.5.5",
+    "vite-plugin-vue2": "^2.0.3",
     "wait-on": "^8.0.1"
   }
 }
