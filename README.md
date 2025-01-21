@@ -10,11 +10,7 @@
     - Firebase (バックエンド as a Service)
     - Django + Python (REST API)
 - データベース
-  - 未定
-  - chat GPT候補
-    - SQLite
-    - Firebase Firestore
-    - PostgreSQL / MySQL
+　- SQLite
 ## 作業場所
   開発は本リポジトリで行う。作業完了後GitHub(クラウドサービス)にPUSHする
 ## 仕様検討
