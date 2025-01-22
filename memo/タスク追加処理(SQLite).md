@@ -30,3 +30,11 @@ npm install --save-dev @types/express @types/node
 ## 2. バックエンド構築
 - ファイル構成
   image](http://ghe.nanao.co.jp/storage/user/287/files/b85a487f-80fa-4eeb-aa51-697472dc2879)
+
+
+## 問題解決
+### vite実行時、ページが見つからないエラー出現
+- vite.config.tsにてdefineConfig内でrootを正しく設定したら解決した
+  ```
+    root: "src/renderer",
+  ```
