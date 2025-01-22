@@ -4,7 +4,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import ModalContents from '../ModalContents/ModalContents'
 import { ModalContext } from '../TaskContext/ModalContext';

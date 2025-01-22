@@ -5,14 +5,16 @@ import { TaskContext } from '../TaskContext/TaskContext';
 import { ModalContext } from '../TaskContext/ModalContext';
 
 export default function TaskDelButton() {
-  const { setTaskName, setProName, setLimit, setLevel, setTaskDetails } = React.useContext(TaskContext);
+  const { setState } = React.useContext(TaskContext) || { state: {}, setState: () => {} };
   const { setOpenModal } = React.useContext(ModalContext);
   const DeleteData = () => {
-    setTaskName('');// TaskNameを削除
-    setProName('');// ProjectNameを削除
-    setLimit(null);// Limitを削除
-    setLevel('2');// Levelを削除
-    setTaskDetails('');// Detailsを削除
+    setState({
+      name: '',
+      project: '',
+      deadline: null,
+      priority: 2,
+      details: '',
+    }); // 状態をリセット
   }
   const DeleteModal = () => {
     DeleteData();

@@ -1,24 +1,23 @@
 {
   "compilerOptions": {
+    "incremental": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
-    "target": "ES2022",
-    "lib": ["ES2023"],
+    "target": "ESNext",
+    "lib": [
+      "dom","ESNext"],
     "module": "ESNext",
     "skipLibCheck": true,
-
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
+    "moduleResolution": "Node",
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": true,
-
-    /* Linting */
+    "noEmit": false,  // 変更点: noEmitをfalseに変更
+    "outDir": "./dist",  // 出力先ディレクトリをdistに指定
+    "esModuleInterop": true,
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    // "noUncheckedSideEffectImports": true
   },
-  "include": ["vite.config.ts"]
+  "include": ["src/main.ts"]
 }

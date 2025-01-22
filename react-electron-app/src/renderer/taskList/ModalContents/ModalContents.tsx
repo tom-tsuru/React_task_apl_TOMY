@@ -12,16 +12,53 @@ import NativeSelect from '@mui/material/NativeSelect';
 import TaskSelButton from './TaskSelButton';
 import TaskDelButton from './TaskDelButton';
 import { TaskContext } from '../TaskContext/TaskContext';
-
+import { Dayjs } from 'dayjs'; 
 
 export default function ModalContents() {
-  const {
-    taskName, setTaskName,
-    proName, setProName,
-    limit, setLimit,
-    level, setLevel,
-    taskDetails, setTaskDetails
-  } = React.useContext(TaskContext);
+  const { state, setState } = React.useContext(TaskContext) || { state: {}, setState: () => {} };
+
+  const inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  // タスク追加処理
+  const handleTaskAdd = () => {
+    // 必要な処理を追加（例: ローカルストレージやAPIへの保存）
+    const task = {
+      name: state.name,
+      project: state.project,
+      deadline: state.deadline?.toISOString(), // DayjsオブジェクトをISOフォーマットに変換
+      priority: state.priority,
+      details: state.details,
+    };
+  
+    // メインプロセスにタスク追加リクエストを送る
+    window.electron.addTask(task)
+    .then((response) => {
+      console.log(response); // 成功メッセージを表示
+      setState({
+        name: '',
+        project: '',
+        deadline: null,
+        priority: 2,
+        details: '',
+      }); // 状態をリセット
+    }).catch((err) => {
+      console.error('タスク追加に失敗しました:', err);
+    });
+  }
+
+  const handleDeadlineChange = (newValue: Dayjs | null) => {
+    setState((prevState) => ({
+      ...prevState,
+      deadline: newValue, // Dayjs型で保存
+    }));
+  };
+
 
   return (
     <Box
@@ -33,23 +70,25 @@ export default function ModalContents() {
         <Stack spacing={1} >
             {/* Task Name */}
             <TextField id="outlined-basic" label="Task Name" sx={{ width: '100%' }} 
-              value={taskName} 
-              onChange={(e) => setTaskName(e.target.value)}
+              name="name"
+              value={state.name} 
+              onChange={inputChange}
               />
 
             {/* Project Name */}
             <TextField id="outlined-basic" label="Project Name" sx={{ width: '100%' }}
-              value={proName}
-              onChange={(e) => setProName(e.target.value)}
+              name="project"
+              value={state.project}
+              onChange={inputChange}
             />
 
             <Stack spacing={10} direction='row' sx={{ width: '100%', }}>
               {/* 期限 */}
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer components={['DatePicker']} sx={{ width: '45%'}}>
-                  <DatePicker label="Limit" sx={{ width: '100%'}}
-                    value={limit}
-                    onChange={(newValue) => setLimit(newValue)}
+                  <DatePicker label="Deadline" sx={{ width: '100%'}}
+                    value={state.deadline}
+                    onChange={handleDeadlineChange}
                     />
                 </DemoContainer>
               </LocalizationProvider>
@@ -57,13 +96,12 @@ export default function ModalContents() {
               {/* 優先度 */}
               <FormControl style={{ width: '40%' ,position: 'absolute', right: '5%'}}>
                 <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                  Level
+                  Priority
                 </InputLabel>
                 <NativeSelect
-                  value={level}
-                  onChange={(e) => setLevel(e.target.value)}
+                  value={state.priority}
                   inputProps={{
-                    name: 'Level',
+                    name: 'priority',
                     id: 'uncontrolled-native',
                   }}>
                   <option value={1}>高</option>
@@ -80,13 +118,14 @@ export default function ModalContents() {
                 multiline // 複数行追加
                 rows={8}   // 初期行数
                 sx={{ width: '100%'}}
-                value={taskDetails}
-                onChange={(e) => setTaskDetails(e.target.value)}
+                name="details"
+                value={state.details}
+                onChange={inputChange}
                 />
 
             {/* 振り分けボタン,削除/クリアボタン */}
             <Stack sx={{ width: '100%' }} spacing={2}>
-              <TaskSelButton />
+              <TaskSelButton onClick={handleTaskAdd}/>
               <TaskDelButton />
             </Stack>
         </Stack>

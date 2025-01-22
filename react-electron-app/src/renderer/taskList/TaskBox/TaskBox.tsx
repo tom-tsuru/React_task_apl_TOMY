@@ -3,9 +3,9 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
-import ToDo from '../ToDo/ToDo';
-import Doing from '../Doing/Doing';
-import Done from '../Done/Done';
+import ToDo from './ToDo/ToDo';
+import Doing from './Doing/Doing';
+import Done from './Done/Done';
 
 const TaskBox = () => {
   return (
