@@ -9,7 +9,7 @@
 
 ## 手順
 1. 必要なパッケージのインストール
-2. バックエンド構築：SQLiteを操作するAPIを構築
+2. バックエンド構築：SQLiteを操作するAPIを構築(electron)
 3. データベース作成：タスク情報を保存するSQLiteテーブルを作成
 4. フロントエンド構築：ReactでAPIと連携し、タスクの表示・編集を実装
 
@@ -17,10 +17,7 @@
 ## 1. 環境準備
 Reactでデータベースを直接操作するのは難しい。そのためSQLiteを操作するバックエンドをNode.jsで構築する
 ### パッケージインストール
-- express：バックエンドAPIを構築
 - better-sqlite3：SQLiteデータベースを操作する
-- @types/express：TypescriptでExpressの型補完を利用するため
-- @types/node：Node.jsの型補完を利用するため
 
 ```
 npm install express better-sqlite3
@@ -28,8 +25,7 @@ npm install --save-dev @types/express @types/node
 ```
 
 ## 2. バックエンド構築
-- ファイル構成
-  image](http://ghe.nanao.co.jp/storage/user/287/files/b85a487f-80fa-4eeb-aa51-697472dc2879)
+- electron
 
 
 ## 問題解決
