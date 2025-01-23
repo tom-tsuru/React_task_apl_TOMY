@@ -37,5 +37,8 @@ npm install --save-dev @types/express @types/node
   
 ### tsc -bが実行されない
 - tsc -b単独で実行し、成功するが、npm run buildでは実行されない。また、build実行するとtsc -b単独でも動作しなくなる。なぜ？
+→tsc --build --cleanでキャッシュ削除したら単独ではうごいた！でもbuildでは実行されない
   - 変更点
     - tsconfig.app/node.jsonのnoEmitをfalseに変更
+
+### electronで表示されない
