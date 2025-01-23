@@ -1,15 +1,6 @@
 import * as React from 'react';
 import { Dayjs } from 'dayjs'; 
 
-// 型定義
-// interface Task {
-//   name: string;
-//   project: string;
-//   deadline: string;
-//   priority: number;
-//   details: string;
-// }
-
 interface TaskContextType {
   state: {
     name: string;

@@ -55,12 +55,12 @@ ipcMain.handle('add-task', task => {
 // ウィンドウ作成とアプリの起動
 function createWindow() {
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1180,
+    height: 840,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
-      nodeIntegration: false,
+      nodeIntegration: true,
     },
   });
 
