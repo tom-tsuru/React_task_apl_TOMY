@@ -34,3 +34,8 @@ npm install --save-dev @types/express @types/node
   ```
     root: "src/renderer",
   ```
+  
+### tsc -bが実行されない
+- tsc -b単独で実行し、成功するが、npm run buildでは実行されない。また、build実行するとtsc -b単独でも動作しなくなる。なぜ？
+  - 変更点
+    - tsconfig.app/node.jsonのnoEmitをfalseに変更
