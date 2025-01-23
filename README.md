@@ -1,16 +1,11 @@
 # Reactを使ったタスク管理アプリ
 ## 使用言語
-- フロントエンド
+- フロントエンド/バックエンド
   - Vite+TypeScript+React
-  - electron(デスクトップアプリ化)
-- バックエンド 
-  - 未定
-  - chat GPT候補
-    - Node.js + Express
-    - Firebase (バックエンド as a Service)
-    - Django + Python (REST API)
+  - electron
 - データベース
 　- SQLite
+
 ## 作業場所
   開発は本リポジトリで行う。作業完了後GitHub(クラウドサービス)にPUSHする
 ## 仕様検討
@@ -44,12 +39,8 @@
   <img src="./task-apl-img.drawio.svg" width="90%"><br><br>
 </div> -->
 
-## 進捗(2024/12/18)
-- material UI活用してタスク追加画面のUI作成
-- 内容クリア/削除機能は実装
+## 進捗(2025/1/23)
+- vite/electron/SQLite DBへのデータ保存を実装した。electron実行でエラー発生、原因追及中
 <img src="http://ghe.nanao.co.jp/storage/user/287/files/e19ea68c-1820-4ef0-bc72-0f8627c17f5a" width="80%">
 <img src="http://ghe.nanao.co.jp/storage/user/287/files/f9ba72f4-eb20-43e7-a388-20eaf2cd5468" width="80%">
 
-## やること
-- electron調べる
-- 値を保持して表示する方法調べる
