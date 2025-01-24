@@ -27,6 +27,9 @@ npm install --save-dev @types/express @types/node
 ## 2. バックエンド構築
 - electron
 
+## SQLiteへのアクセス
+![image](http://ghe.nanao.co.jp/storage/user/287/files/0ff94876-8335-46de-b9b8-40f0ce4f4d11)
+
 
 ## 問題解決
 ### vite実行時、ページが見つからないエラー出現
