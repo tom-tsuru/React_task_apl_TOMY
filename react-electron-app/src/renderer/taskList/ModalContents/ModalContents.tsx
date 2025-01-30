@@ -15,7 +15,16 @@ import { TaskContext } from '../TaskContext/TaskContext';
 import { Dayjs } from 'dayjs'; 
 
 export default function ModalContents() {
-  const { state, setState } = React.useContext(TaskContext) || { state: {}, setState: () => {} };
+  //const { state, setState } = React.useContext(TaskContext);
+  const context = React.useContext(TaskContext);
+
+  if(!context) {
+    console.log("undefined");
+    throw new Error("TaskContext must be used within a TaskContextProvider");
+  }
+
+  const { state, setState }  = context;
+  
 
   const inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -31,11 +40,11 @@ export default function ModalContents() {
     const task = {
       name: state.name,
       project: state.project,
-      deadline: state.deadline?.toISOString(), // DayjsオブジェクトをISOフォーマットに変換
+      deadline: state.deadline?.format('YYYY-MM-DD'), // Dayjsオブジェクトのフォーマット変換(string型を返す)
       priority: state.priority,
       details: state.details,
     };
-  
+    console.log(window.electron);
     // メインプロセスにタスク追加リクエストを送る
     window.electron.addTask(task)
     .then((response) => {

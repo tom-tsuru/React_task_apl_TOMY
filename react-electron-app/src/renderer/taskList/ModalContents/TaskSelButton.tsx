@@ -14,11 +14,11 @@ const TaskSelButton: React.FC<TaskSelButtonProps> = ({ onClick }) => {
             >
                 ToDo
             </Button>
-            <Button variant="contained" color='secondary' sx={{ width: '33%'}}
+            <Button variant="contained" color='secondary' sx={{ width: '33%'}} onClick={onClick}
               >
                 Doing
             </Button>
-            <Button variant="contained" color='secondary' sx={{ width: '33%'}}
+            <Button variant="contained" color='secondary' sx={{ width: '33%'}} onClick={onClick}
               >
                 Done
             </Button>

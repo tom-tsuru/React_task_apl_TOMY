@@ -10,14 +10,13 @@
     "moduleResolution": "Node",
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": false,  // 変更点: noEmitをfalseに変更
-    "outDir": "./dist",  // 出力先ディレクトリをdistに指定
+    "noEmit": false, 
+    "outDir": "./dist/main",  // 出力先ディレクトリをdistに指定
     "esModuleInterop": true,
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    // "noUncheckedSideEffectImports": true
   },
   "include": ["src/main"]
 }

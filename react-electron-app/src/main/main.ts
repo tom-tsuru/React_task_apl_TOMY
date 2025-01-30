@@ -1,6 +1,12 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
-const path = require('path');
-const sqlite3 = require('sqlite3').verbose();
+import { app, BrowserWindow, ipcMain } from 'electron';
+import path from 'path';
+import sqlite3 from 'sqlite3';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+// __filenameと__dirnameをエミュレート
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // SQLiteデータベースの作成/接続
 const db = new sqlite3.Database(path.join(__dirname, 'tasks.db'), (err) => {
@@ -27,8 +33,16 @@ const db = new sqlite3.Database(path.join(__dirname, 'tasks.db'), (err) => {
   }
 });
 
+interface Task{
+  name: string;
+  project: string;
+  deadline: string;
+  priority: number;
+  details: string;
+}
+
 // タスク追加のための関数
-function addTaskToDB(task) {
+function addTaskToDB(task: Task) {
   const { name, project, deadline, priority, details } = task;
   const query = `INSERT INTO tasks (name, project, deadline, priority, details) VALUES (?, ?, ?, ?, ?)`;
 
@@ -37,34 +51,46 @@ function addTaskToDB(task) {
       console.error('Error inserting task:', err);
     } else {
       console.log('Task added successfully');
+      console.log(name);
+      console.log(project);
+      console.log(deadline);
+      console.log(priority);
+      console.log(details);
     }
   });
 }
 
 // レンダラープロセスからタスク追加リクエストを受け取る
-ipcMain.handle('add-task', task => {
+ipcMain.handle('add-task', (_event, task: Task) => {
   return new Promise((resolve, reject) => {
+    try {
     addTaskToDB(task);
     resolve('タスクが追加されました');
-  }).catch((err) => {
+    }catch (err) {
     console.error('Error adding task:', err);
     reject('タスク追加に失敗しました');
+    }
   });
 });
 
 // ウィンドウ作成とアプリの起動
 function createWindow() {
   const win = new BrowserWindow({
-    width: 1180,
-    height: 840,
+    width: 1400,
+    height: 910,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
+      preload: path.join(__dirname, 'preload.mjs'),
       contextIsolation: true,
-      nodeIntegration: true,
+      nodeIntegration: false,
+      devTools: true,
+      sandbox: false, // セキュリティ強化
     },
   });
-
+  const preloadPath = path.join(__dirname, 'preload.mjs');
+  console.log('Preload path:', preloadPath);
+  
   win.loadURL('http://localhost:5173'); // ReactのデフォルトURL
+  // win.loadFile(path.join(__dirname, '../renderer/index.html'));
 }
 
 app.whenReady().then(createWindow);
