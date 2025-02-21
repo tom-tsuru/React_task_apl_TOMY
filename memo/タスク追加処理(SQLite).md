@@ -56,3 +56,46 @@ npm install --save-dev @types/express @types/node
 - 方法1：手動でdist内のプリロードを.mjsに変える
 - package.jsonにPower Shell(Windows)で.jsを.mjsに変換する処理を追加。また、再ビルドする時用に、最初に.mjsを削除する処理も追加
 
+## タスク追加
+### フロントエンド側(React+Typescript+Vite)
+#### 1.タスク追加
+- タスク内容を記載の上、追加したいステータス(ToDo / Doing / Done)ボタンを押下
+  - window.electronAPI.addTask(TaskData)を呼ぶ  
+#### 2.タスクリスト表示
+- window.electronAPI.getTask()を呼び出し、SQLiteからデータを取得
+#### 3.タスクの完了
+- window.electronAPI.completeTask(taskId)を呼ぶ -> データ更新
+#### 4.タスク削除
+- window.electronAPI.deleteTask(taskId)を呼ぶ -> データ削除
+
+### バックエンド(Electron+Node.js)
+役割：レンダラー(フロントエンド)からリクエストを受け取り、SQLiteデータベースを操作して結果を返す
+- **メインプロセス(main.ts or main.js)**
+  - ipcMain.handle("addTask", async (event,taskData) => { ... })
+    - レンダラーから送られてきたtaskDataを受け取り、新しいタスクを追加する
+  - ipcMain.handle("getTasks", async (event) => { ... })
+    - 保存されているタスクの一覧を取得し、レンダラープロセスへ返す
+  - ipcMain.handle("completeTask", async (event, taskId) => { ... })
+    - 指定されたtaskIdのタスクを完了状態に更新する
+  - ipcMain.handle("deleteTask", async (event, taskId) => { ... })
+    - 指定されたtaskIdのタスクを削除する
+
+### データベース(SQLite)
+役割：タスクデータを永続的に保存する
+#### 1.データベースのセットアップ
+- sqlite3を使い、task.dbを作成
+- taskテーブル作成
+#### 2.タスク追加
+- INSERT INTO tasks
+#### 3. タスク取得
+- SELECT * FROM tasks WHERE status = ?
+#### 4. タスク完了
+- UPDATE tasks SET status = 'done' WHERE id = ?
+#### 5. タスク削除
+- DELETE FROM tasks WHERE id = ?
+
+## アプリの流れ
+1. アプリ起動時→getasks()でタスクリストを取得し表示
+2. タスク追加→addTadk(taskData)を実行し、SQLiteに保存→リスト変更
+3. タスク完了→complete(taskId)を実行し、statusを変更→リスト更新
+4. タスク削除→deleteTask(taskId)を実行し、データ削除→リスト更新
