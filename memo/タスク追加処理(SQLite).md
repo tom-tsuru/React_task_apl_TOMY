@@ -99,3 +99,7 @@ npm install --save-dev @types/express @types/node
 2. タスク追加→addTadk(taskData)を実行し、SQLiteに保存→リスト変更
 3. タスク完了→complete(taskId)を実行し、statusを変更→リスト更新
 4. タスク削除→deleteTask(taskId)を実行し、データ削除→リスト更新
+
+## ipcMain.handle
+各ipcMain.handleはレンダラープロセスからipcRenderer.invokeを使って呼び出す
+
