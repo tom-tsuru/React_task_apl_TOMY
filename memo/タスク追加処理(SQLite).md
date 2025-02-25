@@ -80,6 +80,18 @@ npm install --save-dev @types/express @types/node
   - ipcMain.handle("deleteTask", async (event, taskId) => { ... })
     - 指定されたtaskIdのタスクを削除する
 
+- **プリロード(preload.ts or preload.js)**  
+役割：メイン、レンダラープロセス間の通信を安全に行うためのスクリプト
+  - contextBrodge：プリロードスクリプトで使用でき、レンダラーがNode APIへアクセスできるようにする
+    - 記述例
+      ```
+        import { contextBridge, ipcRenderer } = require('electron')
+        contextBridge.exposeInMainWorld('electron', {
+          addTask: () => ipcRenderer.invoke('add-tesk', task);
+        }
+      ```
+      ![image](http://ghe.nanao.co.jp/aina-tomikawa/React-task_management_apl/assets/287/1bd2d091-17a6-4714-a666-3cdfe49548c7)
+
 ### データベース(SQLite)
 役割：タスクデータを永続的に保存する
 #### 1.データベースのセットアップ
