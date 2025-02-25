@@ -87,10 +87,11 @@ npm install --save-dev @types/express @types/node
       ```
         import { contextBridge, ipcRenderer } = require('electron')
         contextBridge.exposeInMainWorld('electron', {
-          addTask: () => ipcRenderer.invoke('add-tesk', task);
+          addTask: () => ipcRenderer.invoke('add-tesk', task); 
         }
       ```
       ![image](http://ghe.nanao.co.jp/aina-tomikawa/React-task_management_apl/assets/287/1bd2d091-17a6-4714-a666-3cdfe49548c7)
+      ![image](http://ghe.nanao.co.jp/aina-tomikawa/React-task_management_apl/assets/287/e732b00b-b73f-4c7c-ba96-1c455c16be3e)
 
 ### データベース(SQLite)
 役割：タスクデータを永続的に保存する
