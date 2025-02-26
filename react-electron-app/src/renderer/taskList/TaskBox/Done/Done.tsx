@@ -5,16 +5,15 @@ import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 
 const StyleBox = styled(Paper)(({ theme }) => ({
-  backgroundColor: '#e3f3f0',
+  background: 'linear-gradient(to bottom, #d2faf5, #b3eee8)',
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: 'center',
   color: theme.palette.text.secondary,
   width: '30%',
-  height: '500px',
   borderRadius: '10px',
   ...theme.applyStyles('dark', {
-    backgroundColor: '#1A2027',
+    background: 'linear-gradient(to bottom, #1A2027, #2D3748)',
   }),
 }));
 

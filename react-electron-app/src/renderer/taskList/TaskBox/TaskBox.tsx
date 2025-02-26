@@ -10,8 +10,8 @@ import Done from './Done/Done';
 const TaskBox = () => {
   return (
     // ボックス(枠なし)の幅を100%に設定
-    <Box sx={{ width: 'calc(100% - 20px)',padding: '10px' }}> 
-      <Stack direction='row' justifyContent='flex-end' sx={{ width: '99%' }} spacing={2}>
+    <Box sx={{ width: 'calc(100% - 30px)', padding: '10px' }}> 
+      <Stack direction='row' justifyContent='flex-end' spacing={2}>
         <ToDo />
         <Doing />
         <Done />

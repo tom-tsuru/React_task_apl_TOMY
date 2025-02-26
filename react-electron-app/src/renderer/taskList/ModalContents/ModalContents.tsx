@@ -15,7 +15,6 @@ import { TaskContext } from '../TaskContext/TaskContext';
 import { Dayjs } from 'dayjs'; 
 
 export default function ModalContents() {
-  //const { state, setState } = React.useContext(TaskContext);
   const context = React.useContext(TaskContext);
 
   if(!context) {

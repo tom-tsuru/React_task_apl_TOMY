@@ -3,7 +3,7 @@ import TaskList from './taskList/TaskList';
 
 function App() {
   return (
-    <div>
+    <div >
       <header>
         <HeaderBar />
       </header>

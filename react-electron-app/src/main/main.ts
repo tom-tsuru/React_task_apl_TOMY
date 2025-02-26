@@ -60,6 +60,19 @@ function addTaskToDB(task: Task) {
   });
 }
 
+// タスク取得のための関数
+function getTasksFromDB() {
+  return new Promise((resolve, reject) => {
+    db.all('SELECT * FROM tasks', (err, rows) => {
+      if (err) {
+        reject('Error retrieving tasks');
+      } else {
+        resolve(rows);
+      }
+    })
+  })
+}
+
 // レンダラープロセスからタスク追加リクエストを受け取る
 ipcMain.handle('add-task', (_event, task: Task) => {
   return new Promise((resolve, reject) => {
@@ -71,6 +84,17 @@ ipcMain.handle('add-task', (_event, task: Task) => {
     reject('タスク追加に失敗しました');
     }
   });
+});
+
+// レンダラープロセスからタスク取得リクエストを受け取る
+ipcMain.handle('get-task', async () => {
+  try {
+    const tasks = await getTasksFromDB();
+    return tasks;
+  } catch (err) {
+    console.error('Error getting tasks:', err);
+    throw new Error('タスクの取得に失敗しました');
+  }
 });
 
 // ウィンドウ作成とアプリの起動

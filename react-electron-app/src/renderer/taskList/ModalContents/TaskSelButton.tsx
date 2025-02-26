@@ -7,6 +7,13 @@ interface TaskSelButtonProps {
 }
 
 const TaskSelButton: React.FC<TaskSelButtonProps> = ({ onClick }) => {
+  const [todoCount, setTodoCount] = React.useState<number>(0);
+  const [doingCount, setDoingCount] = React.useState<number>(0);
+  const [doneCount, setDoneCount] = React.useState<number>(0);
+  const addToDo = (event: React.MouseEvent<HTMLButtonElement>) => {
+      onClick(event);
+      setTodoCount((prevConst) => todoCount + 1);
+  }
   return (
     <div>
           <Stack sx={{ width: '100%'}} spacing={2} direction='row'>
