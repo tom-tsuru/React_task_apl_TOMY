@@ -39,8 +39,4 @@
   <img src="./task-apl-img.drawio.svg" width="90%"><br><br>
 </div> -->
 
-## 進捗(2025/1/23)
-- vite/electron/SQLite DBへのデータ保存を実装した。electron実行でエラー発生、原因追及中
-<img src="http://ghe.nanao.co.jp/storage/user/287/files/e19ea68c-1820-4ef0-bc72-0f8627c17f5a" width="80%">
-<img src="http://ghe.nanao.co.jp/storage/user/287/files/f9ba72f4-eb20-43e7-a388-20eaf2cd5468" width="80%">
 
