@@ -22,7 +22,9 @@ const db = new sqlite3.Database(path.join(__dirname, 'tasks.db'), (err) => {
       project TEXT,
       deadline TEXT,
       priority INTEGER,
-      details TEXT
+      details TEXT,
+      status TEXT,
+      created_at TEXT DEFAULT CURRENT_TIMESTAMP
     )`, (err) => {
       if (err) {
         console.error('Error creating table:', err);
@@ -39,14 +41,15 @@ interface Task{
   deadline: string;
   priority: number;
   details: string;
+  status: string;
 }
 
-// タスク追加のための関数
+// ---タスク追加のための関数--- //
 function addTaskToDB(task: Task) {
-  const { name, project, deadline, priority, details } = task;
-  const query = `INSERT INTO tasks (name, project, deadline, priority, details) VALUES (?, ?, ?, ?, ?)`;
+  const { name, project, deadline, priority, details, status } = task;
+  const query = `INSERT INTO tasks (name, project, deadline, priority, details, status) VALUES (?, ?, ?, ?, ?, ?)`;
 
-  db.run(query, [name, project, deadline, priority, details], (err) => {
+  db.run(query, [name, project, deadline, priority, details, status], (err) => {
     if (err) {
       console.error('Error inserting task:', err);
     } else {
@@ -56,21 +59,9 @@ function addTaskToDB(task: Task) {
       console.log(deadline);
       console.log(priority);
       console.log(details);
+      console.log(status);
     }
   });
-}
-
-// タスク取得のための関数
-function getTasksFromDB() {
-  return new Promise((resolve, reject) => {
-    db.all('SELECT * FROM tasks', (err, rows) => {
-      if (err) {
-        reject('Error retrieving tasks');
-      } else {
-        resolve(rows);
-      }
-    })
-  })
 }
 
 // レンダラープロセスからタスク追加リクエストを受け取る
@@ -86,6 +77,20 @@ ipcMain.handle('add-task', (_event, task: Task) => {
   });
 });
 
+// ---タスク取得のための関数--- //
+function getTasksFromDB() {
+  return new Promise((resolve, reject) => {
+    const query = 'SELECT id, name, project, deadline, priority, details, status, DATE(created_at) AS created_at FROM tasks'
+    db.all(query, (err, rows) => {
+      if (err) {
+        reject('Error retrieving tasks');
+      } else {
+        resolve(rows);
+      }
+    })
+  })
+}
+
 // レンダラープロセスからタスク取得リクエストを受け取る
 ipcMain.handle('get-task', async () => {
   try {
@@ -97,11 +102,76 @@ ipcMain.handle('get-task', async () => {
   }
 });
 
+// ---タスク編集のための関数--- //
+function editTaskInDB(id: number, task: Task): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const { name, project, deadline, priority, details, status } = task;
+    const query = `UPDATE tasks 
+                   SET name = ?, project = ?, deadline = ?, priority = ?, details = ?, status = ? 
+                   WHERE id = ?`;
+
+    db.run(query, [name, project, deadline, priority, details, status, id], function(err) {
+      if (err) {
+        reject('タスクの更新に失敗しました');
+      } else {
+        resolve();
+      }
+    });
+  });
+}
+
+// タスク編集
+ipcMain.handle('edit-task', async (_event, id: number, task: Task) => {
+  try {
+    // idを使ってタスクを削除する処理
+    await editTaskInDB(id, task);
+
+    // 削除後の最新のタスクリスト取得
+    const updateTasks = await getTasksFromDB();
+
+    return updateTasks;
+  } catch (err) {
+    console.error('タスク編集に失敗',err);
+    throw new Error('タスク編集に失敗');
+  }
+})
+
+// ---タスク削除のための関数--- //
+function deleteTaskFromDB(id: number): Promise<void> {
+  return new Promise((resolve, reject) => {
+    // SQL分を使ってタスク削除
+    const query = 'DELETE FROM tasks WHERE id = ?';
+    db.run(query, [id], function(err) {
+      if(err) {
+        reject('タスクの削除に失敗');
+      } else {
+        resolve();
+      }
+    });
+  });
+}
+
+// タスク削除
+ipcMain.handle('delete-task', async (_event,id) => {
+  try {
+    // idを使ってタスクを削除する処理
+    await deleteTaskFromDB(id);
+
+    // 削除後の最新のタスクリスト取得
+    const updateTasks = await getTasksFromDB();
+
+    return updateTasks;
+  } catch (err) {
+    console.error('タスク削除に失敗',err);
+    throw new Error('タスク削除に失敗');
+  }
+})
+
 // ウィンドウ作成とアプリの起動
 function createWindow() {
   const win = new BrowserWindow({
     width: 1400,
-    height: 910,
+    height: 1000,
     webPreferences: {
       preload: path.join(__dirname, 'preload.mjs'),
       contextIsolation: true,

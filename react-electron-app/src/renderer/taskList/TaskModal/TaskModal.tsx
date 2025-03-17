@@ -5,7 +5,7 @@ import AddIcon from '@mui/icons-material/Add';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import ModalContents from '../ModalContents/ModalContents'
+import ModalContents from './ModalContents'
 import { ModalContext } from '../TaskContext/ModalContext';
 
 const style = {
@@ -21,7 +21,7 @@ const style = {
   p: 4,
 };
 
-export default function TaskButtons() {
+export default function TaskModal() {
   const { openModal, setOpenModal } = React.useContext(ModalContext);
   const handleOpen = () => setOpenModal(true);
   const handleClose = () => setOpenModal(false);
@@ -33,15 +33,15 @@ export default function TaskButtons() {
             Add
         </Button>
         <Modal
-        open={openModal}
-        onClose={handleClose}
-        aria-describedby="modal-modal-description"
-        keepMounted
+          open={openModal}
+          onClose={handleClose}
+          aria-describedby="modal-modal-description"
+          keepMounted
         >
-        <Box sx={style}>
-          <ModalContents />
-        </Box>
-      </Modal>
+          <Box sx={style}>
+            <ModalContents />
+          </Box>
+        </Modal>
         {/* <Button variant="contained" startIcon={<DeleteIcon />}>
             Delete
         </Button> */}

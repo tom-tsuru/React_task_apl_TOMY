@@ -1,15 +1,18 @@
 import * as React from 'react';
 import { Dayjs } from 'dayjs'; 
 
-interface TaskContextType {
-  state: {
+interface TaskState {
     name: string;
     project: string;
     deadline: Dayjs | null;
     priority: number;
     details: string;
-  };
-  setState: React.Dispatch<React.SetStateAction<TaskContextType["state"]>>;
+}
+interface TaskContextType {
+  state: TaskState
+  setState: React.Dispatch<React.SetStateAction<TaskState>>;
+  editState: TaskState
+  setEditState: React.Dispatch<React.SetStateAction<TaskState>>;
 }
 
 // Context作成
@@ -24,9 +27,16 @@ export const TaskContextProvider = ({ children }: { children: React.ReactNode })
     priority: 2,
     details: '',
   });
+  const [editState, setEditState] = React.useState<TaskContextType["state"]>({
+    name: '',
+    project: '',
+    deadline: null,
+    priority: 2,
+    details: '',
+  });
 
   return (
-    <TaskContext.Provider value={{ state, setState }}>
+    <TaskContext.Provider value={{ state, setState, editState, setEditState }}>
       {children}
     </TaskContext.Provider>
   );

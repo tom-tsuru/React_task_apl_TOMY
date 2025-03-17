@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import SearchIcon from '@mui/icons-material/Search';
-import TwitterIcon from '@mui/icons-material/Twitter';
+import NoteAltOutlinedIcon from '@mui/icons-material/NoteAltOutlined';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative', // 相対位置
@@ -54,7 +54,7 @@ export default function HeaderBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-        <TwitterIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+        <NoteAltOutlinedIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap

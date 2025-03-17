@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { TaskContext } from '../TaskContext/TaskContext';
 import { ModalContext } from '../TaskContext/ModalContext';
 
@@ -25,7 +26,8 @@ export default function TaskDelButton() {
     <div>
       <Stack spacing={2} direction='row'>
         <Button
-          variant="contained" 
+          variant="outlined" 
+          startIcon={<DeleteIcon />} 
           sx={{
           position: 'absolute', // 絶対位置で配置
           bottom: 15, // 下からの距離

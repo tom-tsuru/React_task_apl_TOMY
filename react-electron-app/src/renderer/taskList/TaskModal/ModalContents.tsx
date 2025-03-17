@@ -2,6 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 import {DemoContainer} from '@mui/x-date-pickers/internals/demo';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
@@ -9,22 +10,27 @@ import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import NativeSelect from '@mui/material/NativeSelect';
-import TaskSelButton from './TaskSelButton';
+// import TaskSelButton from './TaskSelButton';
 import TaskDelButton from './TaskDelButton';
 import { TaskContext } from '../TaskContext/TaskContext';
+import { TaskBoxContext } from '../TaskContext/TaskBoxContext';
 import { Dayjs } from 'dayjs'; 
 
 export default function ModalContents() {
-  const context = React.useContext(TaskContext);
+  const taskContext = React.useContext(TaskContext);
+  const taskBoxContext  = React.useContext(TaskBoxContext);
 
-  if(!context) {
+  if(!taskContext) {
     console.log("undefined");
     throw new Error("TaskContext must be used within a TaskContextProvider");
   }
+  if (!taskBoxContext) {
+    console.log("TaskBoxContextが未定義です");
+    throw new Error("TaskContext must be used within a TaskBoxContextProvider");
+  }
 
-  const { state, setState }  = context;
-  
-
+  const { state, setState }  = taskContext;
+  const { setAddTasks } = taskBoxContext;
   const inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setState((prevState) => ({
@@ -33,8 +39,25 @@ export default function ModalContents() {
     }));
   };
 
+  const fetchTasks = async () => {
+    try {
+      const fetchedTasks = await window.electron.getTask();
+      console.log('取得したタスク',fetchedTasks);
+      fetchedTasks.forEach(task => {
+        console.log('status',task.status)
+      })
+      setAddTasks(fetchedTasks);
+    } catch (err) {
+      console.log('タスクの取得に失敗',err);
+    }
+  };
+  //コンポーネントがマウントされた時にタスクを取得
+  React.useEffect(() => {
+    fetchTasks();
+  },[]);
+
   // タスク追加処理
-  const handleTaskAdd = () => {
+  const handleTaskAdd = (status: 'Todo' | 'Doing' | 'Done') => {
     // 必要な処理を追加（例: ローカルストレージやAPIへの保存）
     const task = {
       name: state.name,
@@ -42,8 +65,8 @@ export default function ModalContents() {
       deadline: state.deadline?.format('YYYY-MM-DD'), // Dayjsオブジェクトのフォーマット変換(string型を返す)
       priority: state.priority,
       details: state.details,
+      status: status,
     };
-    console.log(window.electron);
     // メインプロセスにタスク追加リクエストを送る
     window.electron.addTask(task)
     .then((response) => {
@@ -55,10 +78,15 @@ export default function ModalContents() {
         priority: 2,
         details: '',
       }); // 状態をリセット
-    }).catch((err) => {
+
+      // タスク追加後にDBから最新のタスクを取得して、setAddTasksを更新
+      fetchTasks();
+    })
+    .catch((err) => {
       console.error('タスク追加に失敗しました:', err);
     });
   }
+
 
   const handleDeadlineChange = (newValue: Dayjs | null) => {
     setState((prevState) => ({
@@ -132,10 +160,21 @@ export default function ModalContents() {
                 />
 
             {/* 振り分けボタン,削除/クリアボタン */}
-            <Stack sx={{ width: '100%' }} spacing={2}>
-              <TaskSelButton onClick={handleTaskAdd}/>
-              <TaskDelButton />
+            <Stack sx={{ width: '100%'}} spacing={2} direction='row'>
+              <Button variant="contained" sx={{ width: '33%'}} onClick={() => handleTaskAdd('Todo')}
+              >
+                ToDo
+              </Button>
+              <Button variant="contained" sx={{ width: '33%'}} onClick={() => handleTaskAdd('Doing')}
+              >
+                Doing
+              </Button>
+              <Button variant="contained" sx={{ width: '33%'}} onClick={() => handleTaskAdd('Done')}
+              >
+                Done
+              </Button>
             </Stack>
+            <TaskDelButton />
         </Stack>
     </Box>
   );
