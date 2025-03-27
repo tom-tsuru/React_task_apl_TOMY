@@ -93,6 +93,13 @@ const handleTaskEdit = async (id: number, status: 'Todo' | 'Doing' | 'Done') => 
         [name]: value,
       }));
     };
+    // 優先度
+    const handlePriorityChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+      setEditState({
+        ...editState,
+        priority: event.target.value as number, // 新しい優先度の値を状態に設定
+      });
+      };
     // 期限
     const handleDeadlineChange = (newValue: Dayjs | null) => {
       setEditState((prevState) => ({
@@ -141,6 +148,7 @@ const handleTaskEdit = async (id: number, status: 'Todo' | 'Doing' | 'Done') => 
                 </InputLabel>
                 <NativeSelect
                   value={editState.priority}
+                  onChange={handlePriorityChange}
                   inputProps={{
                     name: 'priority',
                     id: 'uncontrolled-native',

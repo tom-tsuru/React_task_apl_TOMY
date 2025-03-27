@@ -123,8 +123,11 @@ const StatusList = ({ status }: { status: 'Todo' | 'Doing' | 'Done' }) => {
 
   return (
     <StyleBox 
-      style={status === 'Doing' ? {width: '40%'}: {}}>
-      {status}
+      style={status === 'Doing' ? {width: '40%'}: {}}
+    >
+      <p style={{ marginBottom: '0px', fontWeight: 'bold', fontSize: '18px' }}>
+        {status}
+      </p>
       <ScrollableContent>
         {addTasks
           .filter((task) => task.status === status)

@@ -4,6 +4,38 @@
   "version": "0.0.0",
   "type": "module",
   "main": "dist/main/main.js",
+  "build": {
+    "productName": "TOMY",
+    "appId": "com.example.tomy",
+    "files": [
+      "dist/**/*",
+      "dist/main/tasks.db"
+    ],
+    "directories": {
+      "buildResources": "assets",
+      "output": "release"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ],
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": false,
+      "createStartMenuShortcut": true,
+      "runAfterFinish": true
+    },
+  "extraFiles": [
+    {
+      "from": "dist/main/tasks.db",
+      "to": "tasks.db"
+    }
+  ]
+  },
   "scripts": {
     "dev": "vite",
     "build": "npm run revert-mjs && tsc -b --clean && tsc -b && npm run rename-mjs && vite build",
@@ -11,7 +43,8 @@
     "rename-mjs": "powershell -Command \"Get-ChildItem -Recurse -Filter 'preload.js' ./dist/main | Rename-Item -NewName { $_.Name -replace '\\.js$', '.mjs' }\"",
     "electron": "electron .",
     "start": "concurrently \"npm run dev\" \"npm run electron .\"",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "dist": "npm run build && electron-builder --win"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -19,12 +52,14 @@
     "@mui/icons-material": "^6.3.1",
     "@mui/material": "^6.3.1",
     "@mui/x-date-pickers": "^7.23.3",
+    "app-builder-bin": "^5.0.0-alpha.10",
     "axios": "^1.7.9",
     "better-sqlite3": "^11.8.1",
     "dayjs": "^1.11.13",
-    "electron": "^32.0.0",
     "express": "^4.21.2",
+    "node-abi": "^4.2.0",
     "react": "^18.3.1",
+    "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.3.1",
     "sqlite3": "^5.1.7",
     "web-vitals": "^4.2.4"
@@ -38,6 +73,8 @@
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
     "concurrently": "^9.1.2",
+    "electron": "^35.0.2",
+    "electron-builder": "^25.1.8",
     "esbuild": "^0.24.2",
     "eslint": "^9.17.0",
     "eslint-plugin-react-hooks": "^5.0.0",

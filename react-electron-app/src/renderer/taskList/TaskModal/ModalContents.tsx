@@ -87,7 +87,14 @@ export default function ModalContents() {
     });
   }
 
-
+  // 優先度の変更する関数
+  const handlePriorityChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setState({
+      ...state,
+      priority: event.target.value as number, // 新しい優先度の値を状態に設定
+    });
+  };
+  // 期限を変更する関数
   const handleDeadlineChange = (newValue: Dayjs | null) => {
     setState((prevState) => ({
       ...prevState,
@@ -136,6 +143,7 @@ export default function ModalContents() {
                 </InputLabel>
                 <NativeSelect
                   value={state.priority}
+                  onChange={handlePriorityChange}
                   inputProps={{
                     name: 'priority',
                     id: 'uncontrolled-native',

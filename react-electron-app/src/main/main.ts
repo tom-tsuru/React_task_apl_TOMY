@@ -3,10 +3,22 @@ import path from 'path';
 import sqlite3 from 'sqlite3';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import fs from 'fs';
 
 // __filenameと__dirnameをエミュレート
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+// データベースの格納ディレクトリ
+const userDataPath = app.getPath('userData');
+const dbPath = path.join(userDataPath, 'tasks.db');
+const defaultDbPath = path.join(__dirname, 'tasks.db');
+
+// `tasks.db` を `userData` にコピー（初回起動時）
+if (!fs.existsSync(dbPath)) {
+  fs.copyFileSync(defaultDbPath, dbPath);
+  console.log('Database copied to userData directory:', dbPath);
+}
 
 // SQLiteデータベースの作成/接続
 const db = new sqlite3.Database(path.join(__dirname, 'tasks.db'), (err) => {
@@ -180,11 +192,16 @@ function createWindow() {
       sandbox: false, // セキュリティ強化
     },
   });
-  const preloadPath = path.join(__dirname, 'preload.mjs');
-  console.log('Preload path:', preloadPath);
   
-  win.loadURL('http://localhost:5173'); // ReactのデフォルトURL
-  // win.loadFile(path.join(__dirname, '../renderer/index.html'));
+  const isDev = process.env.NODE_ENV === 'development';
+
+  if (isDev) {
+    // 開発モードではViteの開発サーバーを読み込む
+    win.loadURL('http://localhost:5173');
+  } else {
+    // ビルド後はローカルのHTMLを読み込む
+    win.loadFile(path.join(__dirname, '../renderer/index.html'));
+  }
 }
 
 app.whenReady().then(createWindow);
